@@ -1,14 +1,29 @@
-import { useEffect } from 'react';
+import Hero from 'components/Hero/Hero';
+import MoviesList from 'components/MoviesList/MoviesList';
+import { useEffect, useState } from 'react';
+import { getTranding } from 'service/getMovies';
 
 const Home = () => {
+  const [trendings, setTrendings] = useState([]);
+
   useEffect(() => {
-    // Query
+    getTrandingMovies();
   }, []);
+
+  const getTrandingMovies = async () => {
+    try {
+      const response = await getTranding();
+
+      setTrendings(response);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <main>
-      <h1>Trending today</h1>
-      <ul>List</ul>
+      <Hero />
+      <MoviesList movies={trendings} />
     </main>
   );
 };
