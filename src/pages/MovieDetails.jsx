@@ -1,6 +1,7 @@
+import { CastReviewLink, CastReviewsList } from 'components/App/App.styled';
 import Movie from 'components/Movie/Movie';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 import { getMovieById } from 'service/getMovies';
 
 const MovieDetails = () => {
@@ -15,7 +16,7 @@ const MovieDetails = () => {
   const getSelectedMovie = async id => {
     try {
       const response = await getMovieById(id);
-      console.log('One movie', response);
+
       setMovie(response);
     } catch (err) {
       console.error(err);
@@ -23,14 +24,20 @@ const MovieDetails = () => {
   };
 
   return (
-    <main>
+    <>
       {movie && <Movie movie={movie} />}
-      <p>Additional information</p>
-      <ul>
-        <li>Cast</li>
-        <li>Reviews</li>
-      </ul>
-    </main>
+
+      <CastReviewsList>
+        <li>
+          <CastReviewLink to="credits">CAST</CastReviewLink>
+        </li>
+        <li>
+          <CastReviewLink to="reviews">REVIEWS</CastReviewLink>
+        </li>
+      </CastReviewsList>
+
+      <Outlet />
+    </>
   );
 };
 
