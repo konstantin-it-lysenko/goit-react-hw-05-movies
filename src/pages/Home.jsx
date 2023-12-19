@@ -21,10 +21,10 @@ const Home = () => {
   };
 
   return (
-    <main>
+    <>
       <Hero />
       <MoviesList movies={trendings} />
-    </main>
+    </>
   );
 };
 
