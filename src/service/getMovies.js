@@ -16,3 +16,21 @@ export const getMovieById = async (id) => {
 
     return data
 }
+
+export const getCastById = async id => {
+    const { data } = await axios.get(`movie/${id}/credits`)
+
+    return data
+}
+
+export const getReviewsById = async id => {
+    const { data } = await axios.get(`movie/${id}/reviews`)
+
+    return data
+}
+
+export const getMoviesBySearch = async (query, page) => {
+    const { data } = await axios.get(`search/movie?query=${query}&page=${page}`)
+
+    return data
+}
