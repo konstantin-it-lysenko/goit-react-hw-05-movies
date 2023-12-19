@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import SearchForm from 'components/SearchForm/SearchForm';
 import MoviesList from 'components/MoviesList/MoviesList';
@@ -21,7 +21,7 @@ const Movies = () => {
   const getMovies = async (query, curPage) => {
     try {
       // TODO Pagination
-      const { page, results, total_pages } = await getMoviesBySearch(
+      const { /* page */, results, /* total_pages */ } = await getMoviesBySearch(
         query,
         curPage
       );
