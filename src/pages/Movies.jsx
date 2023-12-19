@@ -21,7 +21,7 @@ const Movies = () => {
   const getMovies = async (query, curPage) => {
     try {
       // TODO Pagination
-      const { /* page */, results, /* total_pages */ } = await getMoviesBySearch(
+      const { /* page */ results /* total_pages */ } = await getMoviesBySearch(
         query,
         curPage
       );
