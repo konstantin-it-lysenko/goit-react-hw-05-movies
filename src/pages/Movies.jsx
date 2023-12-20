@@ -1,16 +1,17 @@
-import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import SearchForm from 'components/SearchForm/SearchForm';
 import MoviesList from 'components/MoviesList/MoviesList';
 import { getMoviesBySearch } from 'service/getMovies';
-// import { Link } from 'react-router-dom';
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [curPage, setPage] = useState(1);
+
+  const location = useLocation();
+
   const [searchParams, setSearchParams] = useSearchParams();
-  const query = searchParams.get('query');
-  console.log(query);
+  const query = searchParams.get('query') ?? '';
 
   useEffect(() => {
     if (!query) return;
@@ -34,13 +35,22 @@ const Movies = () => {
 
   const handleSubmit = value => {
     setPage(1);
-    setSearchParams({ query: value, page: curPage });
+    if (value === '') return setSearchParams({});
+    setSearchParams({ query: value.toLocaleLowerCase(), page: curPage });
   };
+
+  const filteredMovies = useMemo(() => {
+    return movies.filter(movie => {
+      return movie.title.toLowerCase().includes(query);
+    });
+  }, [movies, query]);
 
   return (
     <>
       <SearchForm onSubmit={handleSubmit} />
-      {movies.length > 0 && <MoviesList movies={movies} />}
+      {movies.length > 0 && (
+        <MoviesList movies={filteredMovies} location={location} />
+      )}
     </>
   );
 };
