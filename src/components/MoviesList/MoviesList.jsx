@@ -1,7 +1,10 @@
+import { useLocation } from 'react-router-dom';
 import defaultPoster from '../../images/default-poster.jpeg';
 import { List, Item, MovieLink, MovieTitle } from './MoviesList.styled';
 
-const MoviesList = ({ movies, location }) => {
+const MoviesList = ({ movies }) => {
+  const location = useLocation();
+
   return (
     <section style={{ padding: '40px 0' }}>
       <List>
