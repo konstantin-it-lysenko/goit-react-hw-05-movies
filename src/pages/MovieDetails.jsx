@@ -20,12 +20,12 @@ const MovieDetails = () => {
 
   useEffect(() => {
     if (!movieId) return;
-    getSelectedMovie(movieId);
+    getSelectedMovie();
   }, [movieId]);
 
-  const getSelectedMovie = async id => {
+  const getSelectedMovie = async () => {
     try {
-      const response = await getMovieById(id);
+      const response = await getMovieById(movieId);
 
       setMovie(response);
     } catch (err) {
