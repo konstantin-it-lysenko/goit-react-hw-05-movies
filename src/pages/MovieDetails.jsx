@@ -21,7 +21,7 @@ const MovieDetails = () => {
   useEffect(() => {
     if (!movieId) return;
     getSelectedMovie();
-  }, [movieId]);
+  });
 
   const getSelectedMovie = async () => {
     try {
