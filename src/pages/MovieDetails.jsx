@@ -1,6 +1,6 @@
 import { CastReviewLink, CastReviewsList } from 'components/App/App.styled';
 import Movie from 'components/Movie/Movie';
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { getMovieById } from 'service/getMovies';
 
@@ -9,6 +9,7 @@ const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
 
   const location = useLocation();
+  const backLinkRef = useRef(location.state?.from ?? '/');
 
   useEffect(() => {
     if (!movieId) return;
@@ -27,7 +28,7 @@ const MovieDetails = () => {
 
   return (
     <>
-      <Link to={location.state?.from ?? '/'}>Back to movies</Link>
+      <Link to={backLinkRef.current}>Back to movies</Link>
       {movie && <Movie movie={movie} />}
 
       <CastReviewsList>
