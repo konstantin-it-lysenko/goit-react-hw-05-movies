@@ -1,13 +1,20 @@
 import { CastReviewLink, CastReviewsList } from 'components/App/App.styled';
 import Movie from 'components/Movie/Movie';
 import { Suspense, useEffect, useRef, useState } from 'react';
-import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
+import {
+  Link,
+  Outlet,
+  useLocation,
+  useNavigate,
+  useParams,
+} from 'react-router-dom';
 import { getMovieById } from 'service/getMovies';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
 
+  const navigate = useNavigate();
   const location = useLocation();
   const backLinkRef = useRef(location.state?.from ?? '/');
 
@@ -23,6 +30,7 @@ const MovieDetails = () => {
       setMovie(response);
     } catch (err) {
       console.error(err);
+      navigate('/');
     }
   };
 
