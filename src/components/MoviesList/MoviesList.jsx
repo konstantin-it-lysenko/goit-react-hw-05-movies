@@ -1,14 +1,14 @@
 import defaultPoster from '../../images/default-poster.jpeg';
 import { List, Item, MovieLink, MovieTitle } from './MoviesList.styled';
 
-const MoviesList = ({ movies }) => {
+const MoviesList = ({ movies, location }) => {
   return (
     <section style={{ padding: '40px 0' }}>
       <List>
         {movies.map(({ id, original_title, poster_path }) => {
           return (
             <Item key={id}>
-              <MovieLink to={`/movies/${id}`}>
+              <MovieLink to={`/movies/${id}`} state={{ from: location }}>
                 <img
                   src={
                     poster_path
