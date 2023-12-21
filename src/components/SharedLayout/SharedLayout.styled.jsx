@@ -53,4 +53,7 @@ export const PageLink = styled(NavLink)`
   &:hover {
     background: ${theme.colors.active};
   }
+  &.active {
+    background: ${theme.colors.active};
+  }
 `;
